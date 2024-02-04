@@ -11,8 +11,10 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -52,9 +54,11 @@ export default function Login() {
             placeholder="Enter username"
             autoComplete="off"
             size="lg"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.username}
+            // onChange={formik.handleChange}
+            // onBlur={formik.handleBlur}
+            // value={formik.values.username}
+            // instead of this properties we can also write the below line
+            {...formik.getFieldProps("username")}
           />
           <FormErrorMessage>{formik.errors.username}</FormErrorMessage>
         </FormControl>
@@ -67,9 +71,11 @@ export default function Login() {
             autoComplete="off"
             type="password"
             size="lg"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.password}
+            // onChange={formik.handleChange}
+            // onBlur={formik.handleBlur}
+            // value={formik.values.password}
+            // instead of this properties we can also write the below line
+            {...formik.getFieldProps("password")}
           />
           <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
         </FormControl>
@@ -78,7 +84,7 @@ export default function Login() {
           <Button colorScheme="teal" type="submit">
             Log In
           </Button>
-          <Button>Create Account</Button>
+          <Button onClick={() => navigate("/register")}>Create Account</Button>
         </ButtonGroup>
       </VStack>
     </>
